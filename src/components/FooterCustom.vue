@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <footer class="footer p-10 bg-base-300 text-base-content">
+  <footer class="footer p-10 bg-red text-base-content text-white">
     <nav>
       <h6 class="footer-title">Services</h6>
       <a class="link link-hover">Branding</a>
