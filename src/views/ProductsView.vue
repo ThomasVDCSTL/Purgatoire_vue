@@ -1,11 +1,24 @@
 <template>
   <div class="p-12">
-    <h1 class="text-8xl font-alfa text-center p-52">PRODUITS</h1>
+    <h1 class="text-8xl font-alfa text-center pt-52">PRODUITS</h1>
+    <div class="join pb-52 pt-16 w-full flex justify-center">
+      <div>
+        <div>
+          <input class="input input-bordered join-item w-72" placeholder="Search"/>
+        </div>
+      </div>
+      <select class="select select-bordered join-item">
+        <option disabled selected>Filter</option>
+        <option v-for="category in categories" :key="category">{{category}}</option>
+      </select>
+      <div class="indicator">
+        <button class="btn join-item bg-red">Search</button>
+      </div>
+    </div>
     <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
       <li v-for="product in products" :key="product.id"
           class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow w-fit rounded-3xl flex">
-        <product-card :title="product.title" :description="product.description" :image="product.image"
-                      :price="product.price" :category="product.category" />
+        <product-card :product="product"/>
       </li>
     </ul>
   </div>
@@ -15,5 +28,6 @@
 import { useFetch } from '@vueuse/core'
 import ProductCard from '@/components/ProductCard.vue'
 const { data: products } = useFetch('https://fakestoreapi.com/products?limit=21').json()
+const { data: categories } = useFetch('https://fakestoreapi.com/products/categories').json()
 </script>
 

@@ -1,21 +1,20 @@
 <script setup>
-import { defineProps } from 'vue'
-const { title, description, image, price, category } = defineProps(['title', 'description', 'image', 'price', 'category'])
+const {  product } = defineProps(['product'])
 
 
 </script>
 
 <template>
   <div class="card w-96 bg-base-100 shadow-xl">
-    <figure class="group"><img :src="image" :alt="title" class="object-contain w-auto h-48" /></figure>
+    <figure class="group"><img :src="product.image" :alt="product.title" class="object-contain w-auto h-48" /></figure>
     <div class="card-body flex justify-between p-2">
-      <h2 class="card-title text-black">{{ title }}</h2>
-      <p class="card-category text-black"><strong>Artisan : </strong>{{ category }}</p>
-      <p class="text-limited text-black">{{ description }}</p>
+      <h2 class="card-title text-black">{{ product.title }}</h2>
+      <p class="card-category text-black"><strong>Artisan : </strong>{{ product.category }}</p>
+      <p class="text-limited text-black">{{ product.description }}</p>
       <div class="card-actions justify-self-end justify-between items-center">
         <p></p>
-        <p class="center  text-black"><strong>{{ price }}€</strong></p>
-        <button class="btn btn-primary bg-blue border-0 text-white3">Détails</button>
+        <p class="center  text-black"><strong>{{ product.price }}€</strong></p>
+        <RouterLink :to="`/product/${product.id}`" class="btn btn-primary bg-blue border-0 text-white3">Détails</RouterLink>
       </div>
     </div>
   </div>
@@ -26,11 +25,11 @@ const { title, description, image, price, category } = defineProps(['title', 'de
   height : 413px;
 }
 .text-limited {
-  max-width: 380px; /* Limite la largeur du conteneur à 200px */
+  max-width: 380px;
   max-height: 101px;
-  overflow-y: auto; /* Cache le texte qui dépasse du conteneur */
-  text-overflow: ellipsis; /* Ajoute des points de suspension à la fin du texte coupé */
-  white-space: wrap; /* Empêche le texte de passer à la ligne */
+  overflow-y: auto;
+  text-overflow: ellipsis;
+  white-space: wrap;
 }
 
 figure.group:hover img {

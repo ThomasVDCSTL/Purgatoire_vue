@@ -1,17 +1,20 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import HeaderCustom from '@/components/HeaderCustom.vue'
 import FooterCustom from '@/components/FooterCustom.vue'
 </script>
 
 <template>
 
-  <HeaderCustom />
-  <router-view></router-view>
+  <HeaderCustom class="fixed"/>
+  <router-view class="pt-32"></router-view>
   <FooterCustom></FooterCustom>
 </template>
 
 <style scoped>
+HeaderCustom {
+  z-index: 1000;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;

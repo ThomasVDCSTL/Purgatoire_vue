@@ -21,7 +21,7 @@
                     <strong>Produits</strong>
                   </router-link>
                 </summary>
-                <ul class="p-2 w-44 text-black text-xl">
+                <ul class="p-2 w-44 menu text-black text-xl">
                   <li><a>Catgéorie 1</a></li>
                   <li><a>Submenu 2</a></li>
                 </ul>
@@ -89,7 +89,7 @@
 </template>
 
 <style scoped>
-.dropdown{
+.navbar{
   z-index: 1000;
 }
 .input:focus,
