@@ -10,7 +10,7 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/product/:id',
+      path: '/products/:id',
       name: 'product',
       component: () => import('../views/ProductPage.vue')
     },
@@ -20,9 +20,19 @@ const router = createRouter({
       component: () => import('../views/ProductsView.vue')
     },
     {
+      path: '/artisans/:id',
+      name: 'artisan',
+      component: () => import('../views/ArtisanPage.vue')
+    },
+    {
       path: '/artisans',
       name: 'artisans',
       component: () => import('../views/ArtisansView.vue')
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('../views/CartView.vue')
     },
     {
       path: '/about',
@@ -31,6 +41,11 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
+    },
+    {
+      path : '/profile',
+      name : 'profile',
+      component: () => import('../views/ProfileView.vue')
     }
   ]
 })

@@ -14,7 +14,7 @@ const {  product } = defineProps(['product'])
       <div class="card-actions justify-self-end justify-between items-center">
         <p></p>
         <p class="center  text-black"><strong>{{ product.price }}€</strong></p>
-        <RouterLink :to="`/product/${product.id}`" class="btn btn-primary bg-blue border-0 text-white3">Détails</RouterLink>
+        <RouterLink :to="`/products/${product.id}`" class="btn btn-primary bg-blue border-0 text-white3">Détails</RouterLink>
       </div>
     </div>
   </div>

@@ -58,9 +58,9 @@
       </div>
       <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-white rounded-box w-52">
         <li>
-          <a class="justify-between">
+          <router-link to="/profile" class="justify-between">
             Profile
-          </a>
+          </router-link>
         </li>
         <li><a>Settings</a></li>
         <li><a>Logout</a></li>
@@ -78,7 +78,9 @@
           <span class="font-bold text-lg">8 Items</span>
           <span class="text-info">Subtotal: $999</span>
           <div class="card-actions">
-            <button class="btn btn-primary btn-block bg-blue text-white border-0">View cart</button>
+            <router-link to="/cart">
+              <button class="btn btn-primary btn-block bg-blue text-white border-0">View cart</button>
+            </router-link>
           </div>
         </div>
       </div>

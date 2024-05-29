@@ -9,7 +9,9 @@ const { artisan } = defineProps(['artisan'])
       <h2 class="card-title text-4xl">{{ artisan.username }}</h2>
       <p class="text-xl">{{ artisan.email }}</p>
       <div class="card-actions justify-end">
-        <button class="btn btn-primary">Watch</button>
+        <router-link :to="`artisans/${ artisan.id }`" >
+          <button class="btn bg-blue text-white">Watch</button>
+        </router-link>
       </div>
     </div>
   </div>
