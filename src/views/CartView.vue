@@ -1,16 +1,16 @@
 <script setup>
-import { useFetch } from '@vueuse/core'
+import { useCartStore } from '@/stores/cart.store.js'
 
-const { data: cart } = useFetch('https://fakestoreapi.com/carts/1').json()
+const store = useCartStore()
 
 </script>
 
 <template>
   <h1 class="text-8xl font-alfa text-center p-52 pb-32">PANIER</h1>
-<div class="p-12 flex justify-around gap-14">
+<div class="p-12 flex justify-around gap-14 items-center">
 
-  <div class="bg-white3 w-1/2 rounded-3xl">
-    <div class="pt-12 flex justify-center flex-wrap h-full">
+  <div class="bg-white3 w-1/2 rounded-3xl h-fit">
+    <div class="pt-12 flex justify-center flex-wrap h-fit">
       <h2 class="text-5xl font-alfa text-center pb-12 w-full">Informations de livraison</h2>
       <label class="form-control w-1/2 px-12">
         <div class="label">
@@ -93,18 +93,18 @@ const { data: cart } = useFetch('https://fakestoreapi.com/carts/1').json()
         </thead>
         <tbody>
         <!-- row 1 -->
-        <tr v-for="item in cart.products" :key="item.id">
+        <tr v-for="item in store.cart" :key="item.id">
           <td><img src="/src/assets/icone2.png" class="w-20 h-20"/></td>
-          <td>MABEAT</td>
-          <td>{{item.quantity}}</td>
-          <td>1000 €</td>
-          <td class="flex justify-center"><button class="btn bg-red text-white">Delete</button></td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price }}€</td>
+          <td class="flex justify-center"><button class="btn bg-red text-white" v-on:click="store.removeFromCart(item)">Delete</button></td>
         </tr>
         <tr>
           <td></td>
           <td></td>
           <td class="text-xl font-kanit"><strong>Total</strong></td>
-          <td class="text-xl font-kanit"><strong>1000 €</strong></td>
+          <td class="text-xl font-kanit"><strong>{{ store.cartTotal }}</strong></td>
           <td></td>
         </tr>
         </tbody>

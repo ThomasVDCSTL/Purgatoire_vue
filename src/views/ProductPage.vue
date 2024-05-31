@@ -1,9 +1,13 @@
 <script setup>
 import { useFetch } from '@vueuse/core'
 import { useRoute } from 'vue-router'
+import { useCartStore } from '@/stores/cart.store.js'
 
 
   const { data : product }= useFetch('https://fakestoreapi.com/products/'+useRoute().params.id).json();
+
+const store = useCartStore()
+
 
 </script>
 
@@ -22,7 +26,7 @@ import { useRoute } from 'vue-router'
           <p class="text-2xl">{{product.description}}</p>
         </div>
         <div class="flex justify-around">
-          <button class="btn bg-blue text-white text-xl font-normal">Ajouter au panier</button>
+          <button class="btn bg-blue text-white text-xl font-normal" v-on:click="store.addToCart(product,1)">Ajouter au panier</button>
           <button class="btn bg-red text-white text-xl font-normal">Achat rapide</button>
         </div>
       </div>

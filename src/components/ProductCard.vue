@@ -2,6 +2,7 @@
 const {  product } = defineProps(['product'])
 
 
+
 </script>
 
 <template>
