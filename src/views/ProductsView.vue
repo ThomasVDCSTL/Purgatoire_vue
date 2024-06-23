@@ -27,7 +27,7 @@
 <script setup>
 import { useFetch } from '@vueuse/core'
 import ProductCard from '@/components/ProductCard.vue'
-const { data: products } = useFetch('https://fakestoreapi.com/products?limit=21').json()
+const { data: products } = useFetch('http://127.0.0.1:8000/api/products').json()
 const { data: categories } = useFetch('https://fakestoreapi.com/products/categories').json()
 </script>
 

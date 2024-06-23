@@ -1,6 +1,14 @@
 <script setup>
+import {useFetch} from "@vueuse/core";
+import {onMounted, ref, watch} from 'vue'
+
 const {  product } = defineProps(['product'])
 
+const { data : artisan, isFetching, error } = await useFetch('http://localhost:8000/api/users/'+product.artisan_uuid).json();
+const name = ref('Loading..')
+onMounted(() => {
+  name.value = artisan.username
+})
 
 
 </script>
@@ -9,13 +17,15 @@ const {  product } = defineProps(['product'])
   <div class="card w-96 bg-base-100 shadow-xl">
     <figure class="group"><img :src="product.image" :alt="product.title" class="object-contain w-auto h-48" /></figure>
     <div class="card-body flex justify-between p-2">
-      <h2 class="card-title text-black">{{ product.title }}</h2>
-      <p class="card-category text-black"><strong>Artisan : </strong>{{ product.category }}</p>
+      <h2 class="card-title text-black">{{ product.designation }}</h2>
+      <suspense>
+        <p class="card-category text-black" ><strong>Artisan : </strong>{{ name }}</p>
+      </suspense>
       <p class="text-limited text-black">{{ product.description }}</p>
       <div class="card-actions justify-self-end justify-between items-center">
         <p></p>
         <p class="center  text-black"><strong>{{ product.price }}€</strong></p>
-        <RouterLink :to="`/products/${product.id}`" class="btn btn-primary bg-blue border-0 text-white3">Détails</RouterLink>
+        <RouterLink :to="`/products/${product.uuid}`" class="btn btn-primary bg-blue border-0 text-white3">Détails</RouterLink>
       </div>
     </div>
   </div>
@@ -30,7 +40,6 @@ const {  product } = defineProps(['product'])
   max-height: 101px;
   overflow-y: auto;
   text-overflow: ellipsis;
-  white-space: wrap;
 }
 
 figure.group:hover img {

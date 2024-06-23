@@ -41,8 +41,26 @@ export const useUserStore = defineStore('user', {
           console.error('Error : ', error)
         })
     },
+    register(username, password, email) {
+        fetch('http://127.0.0.1:8000/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+                email: email,
+            }),
+            })
+            .then((res) => res.json())
+            .then((json) => {
+                console.log('json : ', json)
+                this.login(username, password)
+            })
+    },
     login(username, password) {
-      fetch('https://fakestoreapi.com/auth/login', {
+      fetch('http://127.0.0.1:8000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

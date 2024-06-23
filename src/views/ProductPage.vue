@@ -2,11 +2,17 @@
 import { useFetch } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import { useCartStore } from '@/stores/cart.store.js'
+import {onMounted} from "vue";
 
+  const { data : product }= await useFetch('http://localhost:8000/api/products/'+useRoute().params.id).json();
+  console.log("non" + product.designation)
 
-  const { data : product }= useFetch('https://fakestoreapi.com/products/'+useRoute().params.id).json();
 
 const store = useCartStore()
+
+onMounted(() => {
+  console.log("oui" + product.designation)
+})
 
 
 </script>
@@ -18,7 +24,7 @@ const store = useCartStore()
       <figure class=""><img :src="product.image" class="object-contain rounded-3xl size-fit"/></figure>
       <div class="font-kanit flex flex-col gap-14">
         <div>
-          <h1 class="text-5xl ">{{product.title}}</h1>
+          <h1 class="text-5xl ">{{product.designation}}</h1>
           <div class="flex justify-between items-center text-4xl">
             <h2 class=" p-8">{{product.price}}€</h2>
             <p class="text-success p-8">En stock</p>
