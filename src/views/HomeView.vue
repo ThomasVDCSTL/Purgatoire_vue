@@ -9,7 +9,7 @@
       <h3 class="text-3xl font-kanit pb-6"><strong>Produits artisanaux</strong></h3>
       <h4 class="text-xl font-kanit pb-6">Découvrez un vaste choix de produits artisanaux du terroir de la Géhenne.</h4>
       <ul role="list" class="p-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 justify-items-center">
-        <li v-for="product in products" :key="product.id"
+        <li v-for="product in products.slice(0,4)"
             class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow w-fit flex">
           <img :src="product.image" :alt="product.title" class="object-contain w-100 h-48">
         </li>
@@ -25,9 +25,9 @@
       <h3 class="text-3xl font-kanit pb-6"><strong>Des artisans dévoués et consciencieux</strong></h3>
       <h4 class="text-xl font-kanit pb-6">Partez à la rencontre d’artisans pour qui le travail bien fait est la priorité.</h4>
       <ul role="list" class="p-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 justify-items-center">
-        <li v-for="product in products" :key="product.id"
+        <li v-for="artisan in artisans.slice(0, 4)" :key="artisan.uuid"
             class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow w-fit flex">
-          <img :src="product.image" :alt="product.title" class="object-contain w-100 h-48">
+          <img :src="artisan.image" :alt="artisan.username" class="object-contain w-100 h-48">
         </li>
       </ul>
       <div class="flex justify-between">
@@ -42,5 +42,6 @@
 
 <script setup>
 import { useFetch } from '@vueuse/core'
-const { data: products } = useFetch('https://fakestoreapi.com/products?limit=4').json()
+const { data: products } = useFetch('http://localhost:8000/api/products').json()
+const { data: artisans } = useFetch('http://localhost:8000/api/artisans').json()
 </script>

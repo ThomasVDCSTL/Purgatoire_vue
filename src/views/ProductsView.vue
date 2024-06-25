@@ -18,7 +18,7 @@
     <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
       <li v-for="product in products" :key="product.id"
           class="col-span-1 divide-y divide-gray-200 bg-white shadow w-fit rounded-3xl flex">
-        <product-card :product="product"/>
+          <product-card :product="product"/>
       </li>
     </ul>
   </div>

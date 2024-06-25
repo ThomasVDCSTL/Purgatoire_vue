@@ -94,8 +94,8 @@ const store = useCartStore()
         <tbody>
         <!-- row 1 -->
         <tr v-for="item in store.cart" :key="item.id">
-          <td><img src="/src/assets/icone2.png" class="w-20 h-20"/></td>
-          <td>{{ item.title }}</td>
+          <td><img :src=item.image class="w-20 h-20"/></td>
+          <td>{{ item.designation }}</td>
           <td>{{ item.quantity }}</td>
           <td>{{ item.price }}€</td>
           <td class="flex justify-center"><button class="btn bg-red text-white" v-on:click="store.removeFromCart(item)">Delete</button></td>

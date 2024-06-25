@@ -2,14 +2,12 @@
 import {useFetch} from "@vueuse/core";
 import {onMounted, ref, watch} from 'vue'
 
-const {  product } = defineProps(['product'])
+const { product } = defineProps(['product'])
 
-const { data : artisan, isFetching, error } = await useFetch('http://localhost:8000/api/users/'+product.artisan_uuid).json();
-const name = ref('Loading..')
-onMounted(() => {
-  name.value = artisan.username
-})
-
+const { data : artisan, isFetching, error } = useFetch('http://localhost:8000/api/users/'+product.artisan_uuid).json();
+console.log(artisan);
+const name = ref("Loading..")
+watch(isFetching,()=>{name.value = artisan.value?.username})
 
 </script>
 
@@ -18,9 +16,9 @@ onMounted(() => {
     <figure class="group"><img :src="product.image" :alt="product.title" class="object-contain w-auto h-48" /></figure>
     <div class="card-body flex justify-between p-2">
       <h2 class="card-title text-black">{{ product.designation }}</h2>
-      <suspense>
-        <p class="card-category text-black" ><strong>Artisan : </strong>{{ name }}</p>
-      </suspense>
+
+      <p class="card-category text-black" ><strong>Artisan : </strong>{{ name }}</p>
+
       <p class="text-limited text-black">{{ product.description }}</p>
       <div class="card-actions justify-self-end justify-between items-center">
         <p></p>

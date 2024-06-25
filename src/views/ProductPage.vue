@@ -2,17 +2,19 @@
 import { useFetch } from '@vueuse/core'
 import { useRoute } from 'vue-router'
 import { useCartStore } from '@/stores/cart.store.js'
-import {onMounted} from "vue";
+import {onMounted, ref, watch} from "vue";
 
-  const { data : product }= await useFetch('http://localhost:8000/api/products/'+useRoute().params.id).json();
-  console.log("non" + product.designation)
+  const { data, isFetching }= useFetch('http://localhost:8000/api/products/'+useRoute().params.id).json();
+  const product = ref(null)
+
+watch(isFetching,()=>{ product.value = data.value } )
+
+
 
 
 const store = useCartStore()
 
-onMounted(() => {
-  console.log("oui" + product.designation)
-})
+
 
 
 </script>

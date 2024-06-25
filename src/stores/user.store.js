@@ -24,9 +24,9 @@ export const useUserStore = defineStore('user', {
       let userId = 0
       if (localStorage.getItem('token') && this.token === null) {
         this.token = localStorage.getItem('token')
-        userId = decode(this.token).sub
+        userId = (this.token).sub
       }
-      fetch(`https://fakestoreapi.com/users/${userId}`)
+      fetch(`https://127.0.0.1:8000/api/users/${userId}`)
         .then((res) => res.json())
         .then((json) => {
           if (json) {
@@ -59,30 +59,38 @@ export const useUserStore = defineStore('user', {
                 this.login(username, password)
             })
     },
-    login(username, password) {
+    login(email, password) {
       fetch('http://127.0.0.1:8000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: username,
-          password: password,
+            email,
+            password,
         }),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          return res.json()
+        })
         .then((json) => {
-          localStorage.setItem('token', json.token)
-          this.token = json.token
-          const decoded = decode(json.token)
-          if (decoded) {
-            this.user = useFetch(`https://fakestoreapi.com/users/${decoded.sub}`)
-            this.isAuthenticated = true;
-            router.push('/');
-          }
-          console.log('decoded : ', decoded)
+          console.log(json.access_token)
+          localStorage.setItem('token', json.access_token)
+          this.token = json.access_token
+          fetch(`http://127.0.0.1:8000/api/user`,{
+            method: 'GET',
+            headers :{
+              Authorization: `Bearer ${this.token}`,
+              'Content-Type': 'application/json',
+            }})
+            .then((res) => res.json())
+            .then((json) => {
+              console.log(json)
+              this.isAuthenticated = true;
+              this.user = json})
           console.log('user : ', this.user)
         })
+
     },
     logout() {
       this.user = null
@@ -93,13 +101,13 @@ export const useUserStore = defineStore('user', {
   },
   persist: true,
 })
-function decode(token) {
-  return JSON.parse(
-    decodeURIComponent(
-      atob(token.split('.')[1].replace('-', '+').replace('_', '/'))
-        .split('')
-        .map((c) => `%${('00' + c.charCodeAt(0).toString(16)).slice(-2)}`)
-        .join(''),
-    ),
-  )
-}
+// function (token) {
+//   return JSON.parse(
+//     URIComponent(
+//       atob(token.split('.')[1].replace('-', '+').replace('_', '/'))
+//         .split('')
+//         .map((c) => `%${('00' + c.charCodeAt(0).toString(16)).slice(-2)}`)
+//         .join(''),
+//     ),
+//   )
+// }

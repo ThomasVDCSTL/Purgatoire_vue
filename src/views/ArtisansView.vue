@@ -2,7 +2,7 @@
 import { useFetch } from '@vueuse/core'
 import ArtisanCard from '@/components/ArtisanCard.vue'
 
-const { data: artisans } = useFetch('https://fakestoreapi.com/users').json()
+const { data: artisans } = useFetch('http://127.0.0.1:8000/api/artisans').json()
 </script>
 
 <template>

@@ -1,9 +1,11 @@
 <script setup>
 import { useFetch } from '@vueuse/core'
 import { useRoute } from 'vue-router'
+import ProductCard from "@/components/ProductCard.vue";
 
 
-const { data : artisan }= useFetch('https://fakestoreapi.com/users/'+useRoute().params.id).json();
+const { data : artisan }= useFetch('http://localhost:8000/api/users/'+useRoute().params.id).json();
+const { data : products } = useFetch('http://localhost:8000/api/artisan_products/'+useRoute().params.id).json();
 
 </script>
 
@@ -11,18 +13,14 @@ const { data : artisan }= useFetch('https://fakestoreapi.com/users/'+useRoute().
   <div class="p-12">
 
     <div class="grid grid-cols-2 justify-items-center gap-6 p-12 bg-white3 rounded-3xl">
-      <figure class=""><img src="" class="placeholder object-contain rounded-3xl size-fit"/></figure>
+      <figure class="w-72"><img :src=artisan.image class="placeholder object-contain rounded-3xl size-fit"/></figure>
       <div class="font-kanit flex flex-col gap-14">
         <div>
           <h1 class="text-5xl ">{{artisan.username}}</h1>
-          <div class="flex justify-between items-center text-4xl">
-            <h2 class=" p-8">{{artisan.name.firstname}}</h2>
-            <p class="text-success p-8">En stock</p>
-          </div>
+
           <p class="text-2xl">{{artisan.email}}</p>
           <p class="text-2xl">{{artisan.phone}}</p>
-          <p class="text-2xl">{{artisan.address.number}} {{artisan.address.street}}</p>
-          <p class="text-2xl">{{artisan.address.city}} {{artisan.address.zipcode}}</p>
+          <p class="text-2xl">{{artisan.address}}</p>
 
         </div>
         <div class="flex justify-around">
@@ -32,6 +30,15 @@ const { data : artisan }= useFetch('https://fakestoreapi.com/users/'+useRoute().
       </div>
     </div>
     <div class="p-12">
+      <h2 class="text-3xl font-kanit font-bold">Produits :</h2>
+
+
+      <ul class="flex gap-5">
+        <li v-for="product in products" :key="product.id"
+            class="col-span-1 divide-y divide-gray-200 bg-white shadow w-fit rounded-3xl flex mt-10">
+          <product-card :product="product"/>
+        </li>
+      </ul>
 
     </div>
   </div>

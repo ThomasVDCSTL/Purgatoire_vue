@@ -2,10 +2,11 @@
 import { Form, Field } from 'vee-validate';
 import * as Yup from 'yup';
 import { useUserStore } from '@/stores/user.store.js'
+import router from '@/router/index.js'
 
 
 const loginSchema = Yup.object().shape({
-  username: Yup.string().required('Username is required'),
+  mail: Yup.string().required('Email is required'),
   password: Yup.string().required('Password is required')
 });
 
@@ -17,8 +18,10 @@ const registerSchema = Yup.object().shape({
 
 async function onSubmitLogin(values) {
   const authStore = useUserStore();
-  const { username, password } = values;
-  await authStore.login(username, password);
+  const { mail, password } = values;
+  console.log(values + " " + mail + " " + password)
+  await authStore.login(mail, password);
+  router.push('/');
 }
 
 
@@ -26,6 +29,7 @@ async function onSubmitRegister(values) {
   const authStore = useUserStore();
   const { username, password, mail } = values;
   await authStore.register(username, password, mail);
+  router.push('/');
 }
 </script>
 
@@ -37,9 +41,9 @@ async function onSubmitRegister(values) {
       <div class="card-body">
         <Form @submit="onSubmitLogin" :validation-schema="loginSchema" v-slot="{ errors, isSubmitting }" >
           <div class="form-group">
-            <label>Username</label>
-            <Field name="username" type="text" class="form-control" :class="{ 'is-invalid': errors.username }" />
-            <div class="invalid-feedback">{{ errors.username }}</div>
+            <label>Email</label>
+            <Field name="mail" type="text" class="form-control" :class="{ 'is-invalid': errors.mail }" />
+            <div class="invalid-feedback">{{ errors.mail }}</div>
           </div>
           <div class="form-group pt-12">
             <label>Password</label>
