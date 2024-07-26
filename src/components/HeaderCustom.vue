@@ -18,7 +18,7 @@ const cartPrice = computed(() => cartStore.cartTotal)
     <div class="flex-1 ">
       <RouterLink to="/" class="btn btn-ghost text-3xl font-alfa font-bold text-white">
         <img src="/src/assets/icone.png" alt="Logo Purgatoire" class="h-10 w-auto">
-        PURGATOIRE
+        PURGATOIRES
       </RouterLink>
     </div>
     <div class="flex-1 gap-2 ">
