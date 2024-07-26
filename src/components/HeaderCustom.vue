@@ -46,7 +46,7 @@ const cartPrice = computed(() => cartStore.cartTotal)
                   </router-link>
                 </summary>
                 <ul class="p-2 w-44 text-black text-xl">
-                  <li><a>NIKTEMOR 1</a></li>
+                  <li><a>NIKTEMOrrR 1</a></li>
                   <li><a>Submenu 2</a></li>
                 </ul>
               </details>
