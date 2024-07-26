@@ -28,7 +28,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: your-dockerhub-username/your-image-name:latest
+          tags: spozer/purgatoire-front:1.0.0
 
       - name: Deploy to server
         env:
@@ -37,4 +37,4 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -o StrictHostKeyChecking=no user@your-server 'docker pull your-dockerhub-username/your-image-name:latest && docker stop your-container-name && docker rm your-container-name && docker run -d --name your-container-name your-dockerhub-username/your-image-name:latest'
+          ssh -o StrictHostKeyChecking=no campus@51.158.101.51 'docker pull spozer/purgatoire-front:1.0.0 && docker stop vue-app && docker rm vue-app && docker run -d --name vue-app spozer/purgatoire-front:1.0.0'
