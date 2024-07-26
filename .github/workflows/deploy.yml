@@ -37,4 +37,4 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh -o StrictHostKeyChecking=no campus@51.158.101.51 'docker pull spozer/purgatoire-front:1.0.0 && docker stop vue-app && docker rm vue-app && docker run -d --name vue-app spozer/purgatoire-front:1.0.0'
+          ssh -o StrictHostKeyChecking=no campus@51.158.101.51 'cd /var/www/html/ && docker compose down && docker pull spozer/purgatoire-front:1.0.0 && docker compose up'
